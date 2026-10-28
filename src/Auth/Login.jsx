@@ -13,7 +13,7 @@ export const Component = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors,isSubmitting },
     } = useForm({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -54,6 +54,7 @@ export const Component = () => {
                 {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
             </div>
             <button
+                disabled={isSubmitting}
                 type="submit"
                 className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
             >

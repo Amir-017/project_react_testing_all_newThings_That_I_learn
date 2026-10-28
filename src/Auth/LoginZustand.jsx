@@ -45,7 +45,7 @@ export default function LoginZustand() {
       [name]: value,
     }));
 
-    setErrors((prev) => ({
+    setErrors((prev) => ({   
       ...prev,
       [name]: "",
     }));
