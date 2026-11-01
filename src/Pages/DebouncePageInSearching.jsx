@@ -21,6 +21,9 @@ export const Component = () => {
   return (
     <div className="">
           <input className="border border-gray-300 rounded-md p-2" value={query} onChange={(e) => setQuery(e.target.value)} />;
+            <h1 className="text-2xl font-bold mb-4">Debounced Search</h1>
+            <p className="text-gray-700">Search Query: {query}</p>
+            <p className="text-gray-700">Debounced Query: {debouncedQuery}</p>
     </div>
   )
 };
