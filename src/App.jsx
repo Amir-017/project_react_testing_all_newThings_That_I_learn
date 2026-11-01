@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "./api/axios";
-import { queryClient } from "./Tank stack/queryClient";
+import { queryClient } from "./Tank Stack/queryClient";
 
+/* Route modules intentionally export both data APIs and components. */
+/* eslint-disable react-refresh/only-export-components */
 
 const usersQuery = {
   queryKey: ["users"],

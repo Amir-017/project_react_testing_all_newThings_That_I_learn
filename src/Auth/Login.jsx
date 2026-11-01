@@ -22,7 +22,7 @@ export const Component = () => {
           
         },
     });
-    const onSubmit = (data) => {
+    const onSubmit = () => {
         navigate('/about');
     };
    return (

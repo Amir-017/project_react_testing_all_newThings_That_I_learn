@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 
-export const AuthLayout = ({ children }) => {
+export const AuthLayout = () => {
   return (
     <div >
      <Outlet />

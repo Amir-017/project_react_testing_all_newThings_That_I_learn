@@ -1,6 +1,8 @@
 import axios from "axios";
 import { isRouteErrorResponse, Link, useLoaderData, useRouteError } from "react-router";
 
+/* Route modules intentionally export both data APIs and components. */
+/* eslint-disable react-refresh/only-export-components */
 export const loader = async () => {
     const[ users , posts , carts ] = await Promise.all([
         axios.get('https://dummyjson.com/users'),
@@ -11,10 +13,7 @@ export const loader = async () => {
 }
 
 export const Component = () => {
-    const { users, posts, carts } = useLoaderData();
-    console.log('users', users);
-    console.log('posts', posts);
-    console.log('carts', carts);
+    const { users } = useLoaderData();
     return (
         <div className="w-full  text-black">
             {users?.map((user) => (
@@ -35,7 +34,6 @@ export const Component = () => {
 
 export const ErrorBoundary = () => {
     const error = useRouteError();
-    console.log(error.message);
     if (isRouteErrorResponse(error)) {
         return (
             <div className="w-full h-screen bg-red-500 text-black flex items-center justify-center">
@@ -43,5 +41,7 @@ export const ErrorBoundary = () => {
             </div>
         )
     }
+
+    return <p className="p-4 text-red-600">Unable to load users.</p>;
 
 }

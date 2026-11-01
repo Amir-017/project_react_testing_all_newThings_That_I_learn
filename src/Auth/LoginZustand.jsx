@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../store/authStore";
+import { useNavigate } from "react-router";
+import { useAuthStore } from "../Store/tokenStore";
 
 export default function LoginZustand() {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function LoginZustand() {
         queryKey: ["user"],
       });
 
-      navigate("/home");
+      navigate("/");
     },
   });
 
