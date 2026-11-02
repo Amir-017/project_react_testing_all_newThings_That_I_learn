@@ -8,6 +8,7 @@ export const Component = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(`https://dummyjson.com/products/search?q=${query}`);
+      console.log("data", response.data.products); // بتتطبع مرة واحدة مع كل طلب
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -20,7 +21,6 @@ export const Component = () => {
     }
   }, [query]);
 
- console.log("data", data?.products);
   return (
     <div className="">
       <input
