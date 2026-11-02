@@ -23,7 +23,8 @@ const router = createBrowserRouter([
       { path: "about", lazy: () => import("./Pages/About") },
       { path: "users/:id", lazy: () => import("./Pages/userDetails") },
       { path: "zustand", lazy: () => import("./Pages/PageTestZustand") },
-      { path: "debouncePage", lazy: () => import("./Pages/DebouncePageInSearching") },
+      { path: "debouncePage", lazy: () => import("./Pages/Searching/DebouncePageInSearching") },
+      { path: "normalSearch", lazy: () => import("./Pages/Searching/NormalSearch") },
 
     ]
   },

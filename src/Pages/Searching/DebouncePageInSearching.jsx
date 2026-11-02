@@ -12,12 +12,23 @@ function useDebounce(value, delay = 500) {
 }
 export const Component = () => {
    const [query, setQuery] = useState("");
+   const [data, setData] = useState(null);
   const debouncedQuery = useDebounce(query, 500);
- console.log("debouncedQuery", debouncedQuery);
-  useEffect(() => {
-    if (debouncedQuery) fetch(`https://dummyjson.com/products/search?q=${debouncedQuery}`);
-  }, [debouncedQuery]);
 
+const fetchData = async () => {
+    try {
+      const response = await fetch(`https://dummyjson.com/products/search?q=${debouncedQuery}`);
+      const result = await response.json();
+      setData(result);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (debouncedQuery) fetchData();
+  }, [debouncedQuery]);
+  console.log("data", data?.products);
   return (
     <div className="">
           <input className="border border-gray-300 rounded-md p-2" value={query} onChange={(e) => setQuery(e.target.value)} />;

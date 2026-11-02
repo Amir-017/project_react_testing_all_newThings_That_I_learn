@@ -6,7 +6,8 @@ export const Navbar = () => {
      <Link to='/login' className="">Login</Link>
      <Link to='/register'>Register</Link>
      <Link to='/about'>About</Link>
-     <Link to='/'>Home</Link>
+     <Link to='/normalSearch'>Normal Search</Link>
+     <Link to='/debouncePage'>Debounce Page</Link>
       {/* <Link to='/users/1'>User Details</Link> */}
       <Link to='/zustand'>Zustand</Link>
     </div>
