@@ -3,25 +3,39 @@ import { useEffect, useState } from "react";
 
 export const Component = () => {
   const [query, setQuery] = useState("");
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(`https://dummyjson.com/products/search?q=${query}`);
-      console.log("data", response.data.products); 
-      setData(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    if (query) {
-      fetchData();
+    if (!query) {
+      setData([]);
+      setLoading(false);
+      return;
     }
+
+    let ignore = false; 
+
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          `https://dummyjson.com/products/search?q=${query}`
+        );
+        if (ignore) return; 
+        console.log("data", response.data.products);
+        setData(response.data.products);
+      } catch (error) {
+        if (!ignore) console.error("Error fetching data:", error);
+      } finally {
+        if (!ignore) setLoading(false);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      ignore = true; 
+    };
   }, [query]);
 
   return (
@@ -33,17 +47,15 @@ export const Component = () => {
       />
       <h1 className="text-2xl font-bold mb-4">Normal Search</h1>
       <p className="text-gray-700">Search Query: {query}</p>
-       {loading && <p>Loading...</p>}
+      {loading && <p>Loading...</p>}
 
       <ul className="mt-4">
-        {products.map((p) => (
+        {data.map((p) => (
           <li key={p.id}>{p.title}</li>
         ))}
       </ul>
 
-      {!loading && debouncedQuery && products.length === 0 && (
-        <p>No results found.</p>
-      )}
+      {!loading && query && data.length === 0 && <p>No results found.</p>}
     </div>
   );
 };
