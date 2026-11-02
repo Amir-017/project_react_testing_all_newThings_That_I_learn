@@ -33,7 +33,17 @@ export const Component = () => {
       />
       <h1 className="text-2xl font-bold mb-4">Normal Search</h1>
       <p className="text-gray-700">Search Query: {query}</p>
-      {loading && <p>Loading...</p>}
+       {loading && <p>Loading...</p>}
+
+      <ul className="mt-4">
+        {products.map((p) => (
+          <li key={p.id}>{p.title}</li>
+        ))}
+      </ul>
+
+      {!loading && debouncedQuery && products.length === 0 && (
+        <p>No results found.</p>
+      )}
     </div>
   );
 };
