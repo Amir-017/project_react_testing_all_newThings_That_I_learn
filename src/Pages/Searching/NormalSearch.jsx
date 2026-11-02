@@ -4,14 +4,17 @@ import { useEffect, useState } from "react";
 export const Component = () => {
   const [query, setQuery] = useState("");
   const [data, setData] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const fetchData = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(`https://dummyjson.com/products/search?q=${query}`);
-      console.log("data", response.data.products); // بتتطبع مرة واحدة مع كل طلب
+      console.log("data", response.data.products); 
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -30,6 +33,7 @@ export const Component = () => {
       />
       <h1 className="text-2xl font-bold mb-4">Normal Search</h1>
       <p className="text-gray-700">Search Query: {query}</p>
+      {loading && <p>Loading...</p>}
     </div>
   );
 };
